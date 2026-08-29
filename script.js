@@ -1,91 +1,257 @@
-const lightbox = document.querySelector(".lightbox");
+body {
+    margin: 0;
+    background: linear-gradient(135deg, #f7e7ce, #d9a7a7);
+    font-family: Arial, sans-serif;
+    color: #292929;
+}
 
-const lightboxImage = document.querySelector(".lightbox-image");
+.album {
+    max-width: 700px;
+    margin: auto;
+    padding: 40px 20px;
+    text-align: center;
+}
 
-const closeButton = document.querySelector(".close-button");
+h1 {
+    font-size: 42px;
+    margin-bottom: 5px;
+}
 
-const previousButton = document.querySelector(".previous-button");
+.date {
+    color: #777;
+    margin-bottom: 30px;
+}
 
-const nextButton = document.querySelector(".next-button");
+.main-photo {
+    width: 100%;
+    border-radius: 15px;
+    display: block;
+}
 
-const photos = document.querySelectorAll(".main-photo, .pic-ture");
+.message {
+    font-size: 20px;
+    margin-top: 25px;
+}
+.pic-ture {
+    width: 100%;
+    height: 600px;
+    border-radius: 15px;
+    display: block;
+    margin: 20px auto;
+    object-fit: cover;
+}
+h2 {
+    font-size: 32px;
+    color: #7b4b5a;
+    margin-top: 60px;
+    margin-bottom: 20px;
+    font-family: Georgia, serif;
+}
+.album section {
+    background: rgba(255, 255, 255, 0.45);
+    border-radius: 25px;
+    padding: 30px;
+    margin-bottom: 40px;
+    box-shadow: 0 10px 30px rgba(80, 50, 50, 0.15);
+    }
+    * {
+    box-sizing: border-box;
+}
+.caption {
+    font-family: Georgia, serif;
+    font-size: 18px;
+    color: #7b4b5a;
+    margin-top: 15px;
+    font-style: italic;
+}
+.lightbox {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
 
-let currentPhoto = 0;
+    display: none;
+    justify-content: center;
+    align-items: center;
+}
+.lightbox-image {
+    max-width: 90%;
+    max-height: 90%;
+    object-fit: contain;
+    border-radius: 15px;
+}
+.close-button {
+    position: absolute;
+    top: 20px;
+    right: 25px;
 
+    background: none;
+    border: none;
 
-photos.forEach(photo => {
+    color: white;
+    font-size: 40px;
+    cursor: pointer;
 
-    photo.addEventListener("click", () => {
+    line-height: 1;
+}
+@media (max-width: 600px) {
 
-        currentPhoto = Array.from(photos).indexOf(photo);
-
-        lightboxImage.src = photo.src;
-
-        lightbox.style.display = "flex";
-
-    });
-
-});
-
-
-lightbox.addEventListener("click", (event) => {
-
-    if (event.target === lightbox) {
-        lightbox.style.display = "none";
+    .album {
+        padding: 25px 12px;
     }
 
-});
-
-
-closeButton.addEventListener("click", () => {
-
-    lightbox.style.display = "none";
-
-});
-nextButton.addEventListener("click", () => {
-
-    currentPhoto = currentPhoto + 1;
-
-    if (currentPhoto >= photos.length) {
-        currentPhoto = 0;
+    h2 {
+        font-size: 28px;
+        margin-top: 35px;
     }
 
-    lightboxImage.src = photos[currentPhoto].src;
-
-});
-previousButton.addEventListener("click", () => {
-
-    currentPhoto = currentPhoto - 1;
-
-    if (currentPhoto < 0) {
-        currentPhoto = photos.length - 1;
+    .main-photo,
+    .pic-ture {
+        border-radius: 12px;
     }
 
-    lightboxImage.src = photos[currentPhoto].src;
-
-});
-let touchStartX = 0;
-lightbox.addEventListener("touchstart", (event) => {
-
-    touchStartX = event.touches[0].clientX;
-
-});
-lightbox.addEventListener("touchend", (event) => {
-
-    const touchEndX = event.changedTouches[0].clientX;
-
-    const swipeDistance = touchEndX - touchStartX;
-
-    if (swipeDistance > 50) {
-
-        previousButton.click();
-
+    .caption {
+        font-size: 16px;
     }
 
-    if (swipeDistance < -50) {
-
-        nextButton.click();
-
+    .lightbox-image {
+        max-width: 92%;
+        max-height: 85%;
     }
 
-});
+    .close-button {
+        top: 15px;
+        right: 15px;
+        font-size: 36px;
+        padding: 10px;
+    }
+
+    .lightbox {
+        touch-action: pan-y;
+    }
+
+    .previous-button,
+    .next-button {
+        width: 50px;
+        height: 65px;
+        font-size: 28px;
+    }
+
+    .previous-button {
+        left: 8px;
+    }
+
+    .next-button {
+        right: 8px;
+    }
+
+}
+.previous-button,
+.next-button {
+    position: absolute;
+
+    top: 50%;
+    transform: translateY(-50%);
+
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+
+    color: white;
+    font-size: 32px;
+
+    width: 55px;
+    height: 70px;
+
+    border-radius: 15px;
+
+    cursor: pointer;
+}
+
+.previous-button {
+    left: 20px;
+}
+
+.next-button {
+    right: 20px;
+}
+.password-screen {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    background: rgba(247, 231, 206, 0.85);
+    backdrop-filter: blur(12px);
+
+    text-align: center;
+    padding: 20px;
+    transition: opacity 0.6s ease;
+}
+.password-screen.hidden {
+    opacity: 0;
+    pointer-events: none;
+    visibility: hidden;
+}
+
+.password-screen h1 {
+    font-family: Georgia, serif;
+    color: #7b4b5a;
+    font-size: 42px;
+    margin-bottom: 10px;
+}
+
+.password-screen p {
+    color: #7b4b5a;
+    font-size: 18px;
+}
+
+#password-input {
+    width: 280px;
+    padding: 14px 18px;
+
+    border: 2px solid rgba(123, 75, 90, 0.3);
+    border-radius: 30px;
+
+    background: rgba(255, 255, 255, 0.7);
+
+    font-size: 18px;
+    text-align: center;
+
+    outline: none;
+}
+
+#password-input:focus {
+    border-color: #7b4b5a;
+}
+
+#password-button {
+    margin-top: 15px;
+
+    padding: 12px 30px;
+
+    border: none;
+    border-radius: 30px;
+
+    background: #7b4b5a;
+    color: white;
+
+    font-size: 17px;
+
+    cursor: pointer;
+}
+
+#password-button:hover {
+    opacity: 0.85;
+}
+
+#password-error {
+    min-height: 25px;
+    color: #9b3f3f !important;
+    font-size: 15px !important;
+}
