@@ -378,3 +378,27 @@ h2 {
     }
 
 }
+.quiz-result {
+    margin-top: 20px;
+    font-family: Georgia, serif;
+    font-size: 18px;
+    color: #7b4b5a;
+    font-style: italic;
+    min-height: 25px;
+}
+
+.quiz-result.wrong-message {
+    animation: resultAppear 0.5s ease;
+}
+
+@keyframes resultAppear {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
