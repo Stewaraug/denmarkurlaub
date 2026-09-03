@@ -171,34 +171,58 @@ passwordButton.addEventListener("click", () => {
     }
 
 });
-const correctSound = new Audio("sounds/correct.mp3");
-const wrongSound = new Audio("sounds/wrong.mp3");
+const correctSound = new Audio("./sounds/correct.mp3");
+const wrongSound = new Audio("./sounds/wrong.mp3");
 
 const quizzes = document.querySelectorAll(".quiz");
 
 quizzes.forEach(quiz => {
 
     const quizAnswers = quiz.querySelectorAll(".quiz-answers button");
-
     const correctAnswer = quiz.dataset.correct;
+    const quizResult = quiz.querySelector(".quiz-result");
 
     quizAnswers.forEach(answer => {
 
         answer.addEventListener("click", () => {
 
+            // Remove previous result classes
+            quizAnswers.forEach(button => {
+                button.classList.remove("correct", "wrong");
+            });
+
             if (answer.dataset.answer === correctAnswer) {
 
+                // CORRECT
                 answer.classList.add("correct");
 
                 correctSound.currentTime = 0;
                 correctSound.play();
 
+                quizResult.textContent = "Richtig! 😎";
+                quizResult.classList.remove("wrong-message");
+
             } else {
 
+                // WRONG
                 answer.classList.add("wrong");
 
                 wrongSound.currentTime = 0;
                 wrongSound.play();
+
+                quizResult.textContent =
+                    "Wird mir stinken... Du hast es tatsächlich geschafft, das falsch zu beantworten. 💀";
+
+                quizResult.classList.add("wrong-message");
+
+                // Send them to Be Judged
+                setTimeout(() => {
+
+                    document.querySelector("#be-judged").scrollIntoView({
+                        behavior: "smooth"
+                    });
+
+                }, 1000);
 
             }
 
