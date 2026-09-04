@@ -402,3 +402,60 @@ h2 {
         transform: translateY(0);
     }
 }
+#help-section {
+    display: none;
+    margin-top: 20px;
+    animation: helpAppear 0.4s ease;
+}
+
+#help-question {
+    font-family: Georgia, serif;
+    font-size: 19px;
+    color: #7b4b5a;
+    min-height: 30px;
+}
+
+.help-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 15px;
+    position: relative;
+}
+
+.help-buttons button {
+    padding: 12px 28px;
+    border: none;
+    border-radius: 25px;
+    background: rgba(255, 255, 255, 0.7);
+    color: #292929;
+    font-size: 17px;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.help-buttons button:hover {
+    transform: scale(1.08);
+}
+
+@keyframes helpAppear {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+#final-clue {
+    display: none;
+    margin-top: 20px;
+}
+
+#final-clue p {
+    font-family: Georgia, serif;
+    font-size: 19px;
+    color: #7b4b5a;
+}
