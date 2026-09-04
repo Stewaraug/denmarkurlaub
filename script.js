@@ -171,6 +171,19 @@ passwordButton.addEventListener("click", () => {
     }
 
 });
+
+
+// NFC / URL PASSWORD
+
+const urlParams = new URLSearchParams(window.location.search);
+
+const urlPassword = urlParams.get("password");
+
+if (urlPassword === correctPassword) {
+
+    passwordScreen.classList.add("hidden");
+
+}
 const correctSound = new Audio("./sounds/correct.mp3");
 const wrongSound = new Audio("./sounds/wrong.mp3");
 
